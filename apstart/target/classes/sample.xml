@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:barn="http://www.mulesoft.org/schema/mule/barn" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/barn http://www.mulesoft.org/schema/mule/barn/current/mule-barn.xsd">
+    <http:listener-config name="Soap_Listener_Configuration" host="0.0.0.0" port="8090" doc:name="HTTP Listener Configuration"/>
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
+    <http:listener-config name="Serv_HTTP_Listener_Configuration1" host="0.0.0.0" port="8085" doc:name="HTTP Listener Configuration"/>
+    <barn:config name="Barn__Configuration" greeting="Helloooooooooooooooo" reply="How are you?????????????" doc:name="Barn: Configuration"/>
+    <flow name="sampleFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/sample" doc:name="HTTP"/>
+        <set-payload doc:name="Set Payload" value="#['Hello Hitler'.toUpperCase()]"/>
+        <set-property propertyName="qpname" value="#[message.inboundProperties.'http.query.params'.name]" doc:name="Property"/>
+        <set-variable variableName="qptype" value="#[message.inboundProperties.'http.query.params'.type]" doc:name="Variable"/>
+        <logger level="INFO" doc:name="Logger" category="String Type" message="#[payload]"/>
+    </flow>
+    <flow name="sampleFlow1">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/barn" allowedMethods="GET" doc:name="HTTP"/>
+        <barn:put-in-barn config-ref="Barn__Configuration" animal="Tiger" doc:name="Barn"/>
+        <logger message="loggg:::: #[payload]" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>
