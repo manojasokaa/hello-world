@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/barn http://www.mulesoft.org/schema/mule/bar
     <barn:config name="Barn__Configuration" greeting="Helloooooooooooooooo" reply="How are you?????????????" doc:name="Barn: Configuration"/>
     <flow name="sampleFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/sample" doc:name="HTTP"/>
-        <set-payload doc:name="Set Payload" value="#['Hello Hitler'.toUpperCase()]"/>
+        <set-payload doc:name="Set Payload" value="#['Hello HitlerManoj...............'.toUpperCase()]"/>
         <set-property propertyName="qpname" value="#[message.inboundProperties.'http.query.params'.name]" doc:name="Property"/>
         <set-variable variableName="qptype" value="#[message.inboundProperties.'http.query.params'.type]" doc:name="Variable"/>
         <logger level="INFO" doc:name="Logger" category="String Type" message="#[payload]"/>
