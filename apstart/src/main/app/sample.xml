@@ -24,7 +24,7 @@ http://www.mulesoft.org/schema/mule/barn http://www.mulesoft.org/schema/mule/bar
         <logger message="#[payload]" level="INFO" category="String Type" doc:name="Copy_of_Logger"/>
         <logger message="#[payload]" level="INFO" category="String Type" doc:name="Copy_of_Logger"/>
     </flow>
-    <flow name="sampleChange">
+    <flow name="sample1111111">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/barn" allowedMethods="GET" doc:name="HTTP"/>
         <barn:put-in-barn config-ref="Barn__Configuration" animal="Tiger" doc:name="Barn"/>
         <logger message="loggg:::: #[payload]" level="INFO" doc:name="Logger"/>
